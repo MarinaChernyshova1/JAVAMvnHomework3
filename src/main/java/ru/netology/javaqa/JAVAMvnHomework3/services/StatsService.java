@@ -14,20 +14,22 @@ public class StatsService {
     }
 
     public int minSales(int[] sales) {
-        int minMonth = 0; // номер месяца с минимальными продажами среди просмотренных ранее
+        int minMonth = 0;
 
         for (int i = 0; i < sales.length; i++) {
-            if (sales[i] <= sales[minMonth]) { // значит, в рассматриваемом i-м месяце продаж меньше
-                minMonth = i; // запомним его как минимальный
+            if (sales[i] <= sales[minMonth]) {
+                minMonth = i;
             }
         }
 
-        return minMonth + 1; // месяца нумеруются с 1, а индексы массива с 0, нужно сдвинуть ответ на 1
+        return minMonth + 1;
     }
 
     public int totalSailAmount(int[] sales) {
-        int totalAmount = sales[0] + sales[1] + sales[2] + sales[3] + sales[4] + sales[5] + sales[6] + sales[7] + sales[8] + sales[9] + sales[10] +
-                sales[11];
+        int totalAmount = 0;
+        for (int sale : sales) {
+            totalAmount = totalAmount + sale;
+        }
         return (int) totalAmount;
     }
 
@@ -41,18 +43,21 @@ public class StatsService {
 
     public int aboveAverageSale(int[] sales) {
         int monthAboveAverage = 0;
+        int averageAmount = averageAmount(sales);
         for (int sale : sales) {
-            if (sale > averageAmount(sales)) {
+            if (sale > averageAmount) {
                 monthAboveAverage++;
             }
         }
 
         return monthAboveAverage;
     }
+
     public int belowAverageSale(int[] sales) {
         int monthBelowAverage = 0;
+        int averageAmount = averageAmount(sales);
         for (int sale : sales) {
-            if (sale < averageAmount(sales)) {
+            if (sale < averageAmount) {
                 monthBelowAverage++;
             }
         }
